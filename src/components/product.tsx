@@ -40,6 +40,7 @@ function Ecommerce() {
     };
 
 
+
     return (
         <>
             <div className="mx-auto lg:w-[90%] h-screen">
@@ -49,10 +50,10 @@ function Ecommerce() {
                 <main className="grid grid-cols-1 gap-0  lg:grid-cols-2 my-10 p-4 mx-10 lg:gap-10
             ">
                     <div className="img flex-1 my-0">
-                        <div className="main relative flex flex-col lg:my-40 xl:my-20">
+                        <div className="main relative flex flex-col lg:my-30 xl:my-20">
                             <img src={productImages[currentIndex]} alt="product"
                                 onClick={() => setIsModalOpen(true)}
-                                className="rounded-xl relative lg:cursor-pointer mb-0 lg:w-2/3" />
+                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3" />
 
                                 {/* Navigation (mobile only) */}
                                 <div className="grid grid-cols-2 justify-between my-0 items-center mx-5 relative bottom-60 lg:hidden">
@@ -61,7 +62,7 @@ function Ecommerce() {
                                 </div>
 
                             {/* Thumbnail images for desktop */}
-                            <div className="thumbnail hidden lg:grid lg:grid-cols-4 gap-0 mx-0 lg:w-4/5 rounded-lg my-2">
+                            <div className="thumbnail hidden lg:grid lg:grid-cols-4 lg:gap-0 mx-0 lg:w-5/5 xl:w-4/6 rounded-lg my-2">
 
                                 {thumbNailImages.map((img, index) => (
                                     <img
@@ -117,14 +118,14 @@ function Ecommerce() {
 
                         <p className="font-semibold text-[var(--dark-grayish-blue)]"> <s>$250.00</s>
                         </p>
-                        <div className="buttons inline-flex gap-6">
-                            <button className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-4 my-4 rounded-lg font-bold">
-                                <Plus size={15} strokeWidth={3} color="#ff7d1a" />
+                        <div className="buttons flex flex-row gap-6">
+                            <button className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
+                                <Plus size={15} strokeWidth={3} color="#ff7d1a"/>
                                 <p className="font-bold">0</p>
                                 <Minus size={15} color="#ff7d1a" strokeWidth={3} />
 
                             </button>
-                            <button className="bg-[#ff7d1a] px-10 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold">
+                            <button className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold">
                                 <ShoppingCart size={18} />
                                 Add to cart
 

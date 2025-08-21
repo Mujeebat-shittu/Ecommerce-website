@@ -1,8 +1,8 @@
 import Logo from "../assets/logo.svg"
+import Cart from "./cart";
 import Avatar from "../assets/image-avatar.png"
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { ShoppingCart } from "lucide-react";
 
 
 
@@ -13,10 +13,9 @@ function Header() {
         setToggle(!toggle);
 
     };
-        const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="flex items-center justify-between">
+        <header className="flex items-center justify-between ml-5">
             <div
                 className="icons flex  items-center justify-center md:hidden mr-6"
                 onClick={toggleMenu}
@@ -25,7 +24,7 @@ function Header() {
             </div>
 
             <div>
-                <img src={Logo} alt="" />
+                <img src={Logo} alt="Logo"/>
             </div>
 
             {/* nav desktop */}
@@ -66,18 +65,9 @@ function Header() {
             <div className="flex flex-row mx-4 gap-4 items-center justify-center">
 
                 {/* <Cart/> */}
-                <ShoppingCart size={28} className="cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
 
-                {/* Dropdown */}
-
-                {isOpen && (
-                    <div className="absolute right-10 top-35 w-[300px] h-[200px] bg-white shadow-lg rounded-lg p-4 z-10">
-                        <h1 className="text-lg font-bold text-left">Cart</h1>
-                        <div className="h-0.5 w-[100%] bg-[var(--light-grayish-blue)] my-4"></div>
-                        <p className="my-10 text-gray-500 font-semibold ">Your cart is empty.</p>
-                    </div>
-
-                )}
+                <Cart/>
+                
                 <img src={Avatar} alt="" className="w-1/3" />
             </div>
 
