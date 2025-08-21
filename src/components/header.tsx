@@ -1,0 +1,89 @@
+import Logo from "../assets/logo.svg"
+import Avatar from "../assets/image-avatar.png"
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { ShoppingCart } from "lucide-react";
+
+
+
+function Header() {
+
+    const [toggle, setToggle] = useState(false);
+    const toggleMenu = () => {
+        setToggle(!toggle);
+
+    };
+        const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <header className="flex items-center justify-between">
+            <div
+                className="icons flex  items-center justify-center md:hidden mr-6"
+                onClick={toggleMenu}
+            >
+                {toggle ? <X /> : <Menu className="cursor-pointer" />}
+            </div>
+
+            <div>
+                <img src={Logo} alt="" />
+            </div>
+
+            {/* nav desktop */}
+
+            <div className="hidden md:flex flex-row p-4 justify-between items-center text-[var(--grayish-blue)]">
+                <div className="">
+                    <ul className="flex flex-row p-4 m-4 gap-4 cursor-pointer">
+                        <li className="">Collections</li>
+                        <li className="">Men</li>
+                        <li className="">Women</li>
+                        <li className="">About</li>
+                        <li className="">Contact</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            {/* nav mobile */}
+
+            <div className={` ${toggle ? "flex" : "hidden"} flex flex-col p-4 justify-between items-center my-5 transition-[0.5s height ease-in-out] h-[100%] fixed w-[60%] -top-5 bg-white left-0 z-20 `}>
+
+                <div className="">
+                    <div className="self-end absolute right-10 top-4 " onClick={toggleMenu}>
+                        <X size={30} strokeWidth={3} className="cursor-pointer" />
+                    </div>
+                    <ul className="flex flex-col p-4 m-4 my-10 gap-4 cursor-pointer font-semibold text-lg"> 
+                        <li>Collections</li>
+                        <li className="">Men </li>
+                        <li className="">Women</li>
+                        <li className="">About</li>
+                        <li className="">Contact</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="flex flex-row mx-4 gap-4 items-center justify-center">
+
+                {/* <Cart/> */}
+                <ShoppingCart size={28} className="cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
+
+                {/* Dropdown */}
+
+                {isOpen && (
+                    <div className="absolute right-10 top-35 w-[300px] h-[200px] bg-white shadow-lg rounded-lg p-4 z-10">
+                        <h1 className="text-lg font-bold text-left">Cart</h1>
+                        <div className="h-0.5 w-[100%] bg-[var(--light-grayish-blue)] my-4"></div>
+                        <p className="my-10 text-gray-500 font-semibold ">Your cart is empty.</p>
+                    </div>
+
+                )}
+                <img src={Avatar} alt="" className="w-1/3" />
+            </div>
+
+
+        </header>
+    )
+}
+
+export default Header
