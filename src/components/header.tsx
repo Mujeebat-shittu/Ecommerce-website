@@ -20,11 +20,11 @@ function Header() {
                 className="icons flex  items-center justify-center md:hidden mr-6"
                 onClick={toggleMenu}
             >
-                {toggle ? <X /> : <Menu className="cursor-pointer" />}
+                {toggle ? <X /> : <Menu className="cursor-pointer ml-5" />}
             </div>
 
             <div>
-                <img src={Logo} alt="Logo"/>
+                <img src={Logo} alt="Logo" className="ml-5"/>
             </div>
 
             {/* nav desktop */}
