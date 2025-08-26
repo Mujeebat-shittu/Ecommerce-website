@@ -97,7 +97,7 @@ function Ecommerce() {
         if (currentItem.quantity > 1) {
             updateItemQuantity(product.id, currentItem.quantity - 1);
         } else {
-            removeItem(product.id); 
+            removeItem(product.id);
         }
     };
 
@@ -184,18 +184,34 @@ function Ecommerce() {
 
                         <div className="buttons flex flex-row gap-6">
 
-                            <button className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
-                                <Minus size={15} color="#ff7d1a" strokeWidth={3} onClick={handleDecrease} onTouchStart={handleDecrease} />
-                                <p className="font-bold">{
-                                    items.find((item) => item.id === product.id)?.quantity || 0}
-                                </p>
-                                <Plus size={15} strokeWidth={3} color="#ff7d1a" onClick={handleIncrease} onTouchStart={handleIncrease} />
-
-                            </button>
-                            <button className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold touch-auto"
-                                onClick={() => cartClick}
-                                onTouchStart={() => cartClick}
+                            {/* Quantity Button */}
+                            <div className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
+                                <button
+                                    onClick={handleDecrease}
+                                    onTouchStart={handleDecrease}
+                                    className="flex items-center justify-center"
                                 >
+                                    <Minus size={15} color="#ff7d1a" strokeWidth={3} />
+                                </button>
+
+                                <p className="font-bold">
+                                    {items.find((item) => item.id === product.id)?.quantity || 0}
+                                </p>
+
+                                <button
+                                    onClick={handleIncrease}
+                                    onTouchStart={handleIncrease}
+                                    className="flex items-center justify-center"
+                                >
+                                    <Plus size={15} strokeWidth={3} color="#ff7d1a" />
+                                </button>
+                            </div>
+                            {/* Add to Cart Button */}
+                            <button
+                                className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold touch-auto"
+                                onClick={() => cartClick(product)}      
+                                onTouchStart={() =>cartClick(product)} 
+                            >
                                 <ShoppingCart size={18} />
                                 Add to Cart
                             </button>
