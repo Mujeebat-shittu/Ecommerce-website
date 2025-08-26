@@ -45,7 +45,7 @@ function Ecommerce() {
     };
 
     type Product = {
-        id: string ;
+        id: string;
         name: string;
         price: number;
         img: string;
@@ -74,9 +74,9 @@ function Ecommerce() {
         const existingItem = items.find((item) => item.id === product.id)?.quantity ?? 0;
 
         if (existingItem) {
-            updateItemQuantity(product.id, existingItem + 1);
+            updateItemQuantity(product.id, (existingItem ?? 0) + 1);
         } else {
-            addItem(product);
+            addItem({ ...product, quantity: 1 });
         }
 
     };
@@ -213,8 +213,8 @@ function Ecommerce() {
                             {/* Add to Cart Button */}
                             <button
                                 className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold touch-auto"
-                                onClick={() => cartClick(product)}      
-                                onTouchStart={() =>cartClick(product)} 
+                                onClick={() => cartClick(product)}
+                                onTouchStart={() => cartClick(product)}
                             >
                                 <ShoppingCart size={18} />
                                 Add to Cart
