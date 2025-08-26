@@ -182,10 +182,10 @@ function Ecommerce() {
 
 
 
-                        <div className="buttons block lg:flex lg:flex-row gap-6">
+                        <div className="buttons block md:flex md:flex-row gap-6">
 
                             {/* Quantity Button */}
-                            <div className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
+                            <div className="inline-flex py-4 px-6 w-full lg:w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
                                 <button
                                     onClick={handleDecrease}
                                     onTouchStart={handleDecrease}
