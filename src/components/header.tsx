@@ -42,8 +42,8 @@ function Header() {
                                 key={link}
                                 onClick={() => setActive(link)}
                                 className={`relative pb-1 capitalize ${active === link
-                                    ? "text-[var(--dark-grayish-blue)] after:content-[''] after:absolute after:left-0 after:top-15 after:w-full after:h-[3px] after:bg-[#ff7d1a]"
-                                    : "text-gray-600"
+                                        ? "text-[var(--dark-grayish-blue)] after:content-[''] after:absolute after:left-0 after:top-15 after:w-full after:h-[3px] after:bg-[#ff7d1a]"
+                                        : "text-gray-600"
                                     }`}
                             >
                                 {link}
