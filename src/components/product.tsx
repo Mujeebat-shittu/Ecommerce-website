@@ -193,7 +193,7 @@ function Ecommerce() {
                                 <button
                                     onClick={handleDecrease}
                                     onTouchStart={handleDecrease}
-                                    className="flex items-center justify-center"
+                                    className="flex items-center justify-center cursor-pointer"
                                 >
                                     <Minus size={15} color="#ff7d1a" strokeWidth={3} />
                                 </button>
@@ -205,7 +205,7 @@ function Ecommerce() {
                                 <button
                                     onClick={handleIncrease}
                                     onTouchStart={handleIncrease}
-                                    className="flex items-center justify-center"
+                                    className="flex items-center justify-center cursor-pointer"
                                 >
                                     <Plus size={15} strokeWidth={3} color="#ff7d1a" />
                                 </button>
