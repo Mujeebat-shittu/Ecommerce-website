@@ -36,13 +36,13 @@ export default function Cart() {
           <>
             {/* Overlay */}
             <div
-              className="fixed inset-0 bg-black/90 z-10 "
+              className="fixed inset-0 bg-black/90 z-20 "
               onClick={() => setIsOpen(false)}
             ></div>
 
 
             {/* Dropdown */}
-            <div className="absolute right-0 top-10 w-lg h-fit bg-white shadow-lg rounded-lg p-4 z-10 mx-auto ">
+            <div className="absolute right-0 top-10 w-lg h-fit bg-white shadow-lg rounded-lg p-4 z-30 mx-auto ">
               <h1 className="text-lg font-bold text-left">Cart</h1>
               <div className="h-0.5 w-[100%] bg-[var(--dark-grayish-blue)] my-4"></div>
 
@@ -90,7 +90,7 @@ export default function Cart() {
               ))}
 
               {/* Checkout Button */}
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center touch-auto">
                 <button
                   onClick={() => emptyCart()}
                   className="px-8 py-2 border-none w-full bg-[#ff7d1a] text-lg text-black rounded-lg font-bold cursor-pointer">
