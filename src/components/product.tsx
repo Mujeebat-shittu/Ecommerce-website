@@ -185,15 +185,17 @@ function Ecommerce() {
                         <div className="buttons flex flex-row gap-6">
 
                             <button className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
-                                <Minus size={15} color="#ff7d1a" strokeWidth={3} onClick={handleDecrease} className="touch-auto" />
+                                <Minus size={15} color="#ff7d1a" strokeWidth={3} onClick={handleDecrease} onTouchStart={handleDecrease} />
                                 <p className="font-bold">{
                                     items.find((item) => item.id === product.id)?.quantity || 0}
                                 </p>
-                                <Plus size={15} strokeWidth={3} color="#ff7d1a" onClick={handleIncrease} className="touch-auto" />
+                                <Plus size={15} strokeWidth={3} color="#ff7d1a" onClick={handleIncrease} onTouchStart={handleIncrease} />
 
                             </button>
                             <button className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold touch-auto"
-                                onClick={() => cartClick}>
+                                onClick={() => cartClick}
+                                onTouchStart={() => cartClick}
+                                >
                                 <ShoppingCart size={18} />
                                 Add to Cart
                             </button>

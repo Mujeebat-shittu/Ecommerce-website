@@ -20,7 +20,7 @@ function Header() {
 
 
     return (
-        <header className="flex items-center justify-between ml-5 h-[70px]">
+        <header className="flex items-center justify-between ml-10 h-[70px]">
             <div
                 className="icons flex  items-center justify-center md:hidden mr-6"
                 onClick={toggleMenu}
