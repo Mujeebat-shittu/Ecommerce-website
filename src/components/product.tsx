@@ -118,7 +118,7 @@ function Ecommerce() {
                         <div className="main relative flex flex-col lg:my-30 xl:my-20">
                             <img src={productImages[currentIndex].img} alt="product"
                                 onClick={() => setIsModalOpen(true)}
-                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3" />
+                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3 transition-opacity duration-500 ease-in-out" />
 
                             {/* Navigation (mobile only) */}
                             <div className="grid grid-cols-2 justify-between my-0 items-center mx-5 relative bottom-60 lg:hidden">
