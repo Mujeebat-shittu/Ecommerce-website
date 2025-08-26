@@ -36,8 +36,10 @@ export default function Cart() {
           <>
             {/* Overlay */}
             <div
-              className="fixed inset-0 bg-black/90 z-20 "
+              className="fixed inset-0 bg-black/90 z-40 "
               onClick={() => setIsOpen(false)}
+              onTouchStart={() => setIsOpen(false)}
+
             ></div>
 
 
