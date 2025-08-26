@@ -45,10 +45,11 @@ function Ecommerce() {
     };
 
     type Product = {
-        id: string;
+        id: string ;
         name: string;
         price: number;
         img: string;
+        quantity?: number;
     };
 
 
@@ -70,10 +71,10 @@ function Ecommerce() {
 
 
     const cartClick = (product: Product) => {
-        const existingItem = items.find((item) => item.id === product.id);
+        const existingItem = items.find((item) => item.id === product.id)?.quantity ?? 0;
 
         if (existingItem) {
-            updateItemQuantity(product.id, existingItem.quantity + 1);
+            updateItemQuantity(product.id, existingItem + 1);
         } else {
             addItem(product);
         }
@@ -86,7 +87,7 @@ function Ecommerce() {
         if (!currentItem) {
             addItem({ ...product, quantity: 1 }); // if not in cart, add it
         } else {
-            updateItemQuantity(product.id, currentItem.quantity + 1);
+            updateItemQuantity(product.id, (currentItem.quantity ?? 0) + 1);
         }
     };
 
@@ -94,8 +95,11 @@ function Ecommerce() {
         const currentItem = items.find(item => item.id === product.id);
         if (!currentItem) return;
 
-        if (currentItem.quantity > 1) {
-            updateItemQuantity(product.id, currentItem.quantity - 1);
+        const currentQty = currentItem.quantity ?? 0;
+
+
+        if (currentQty > 1) {
+            updateItemQuantity(product.id, currentQty - 1);
         } else {
             removeItem(product.id);
         }
