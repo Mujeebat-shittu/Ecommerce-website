@@ -6,16 +6,21 @@ import { useState } from "react";
 
 
 
+
 function Header() {
 
     const [toggle, setToggle] = useState(false);
     const toggleMenu = () => {
         setToggle(!toggle);
-
     };
 
+    const [active, setActive] = useState("cart");
+    const links = ["Collections", "Men", "Women", "About", "Contact"];
+
+
+
     return (
-        <header className="flex items-center justify-between ml-5">
+        <header className="flex items-center justify-between ml-5 h-[70px]">
             <div
                 className="icons flex  items-center justify-center md:hidden mr-6"
                 onClick={toggleMenu}
@@ -24,7 +29,7 @@ function Header() {
             </div>
 
             <div>
-                <img src={Logo} alt="Logo" className="ml-5"/>
+                <img src={Logo} alt="Logo" className="ml-5" />
             </div>
 
             {/* nav desktop */}
@@ -32,11 +37,19 @@ function Header() {
             <div className="hidden md:flex flex-row p-4 justify-between items-center text-[var(--grayish-blue)]">
                 <div className="">
                     <ul className="flex flex-row p-4 m-4 gap-4 cursor-pointer">
-                        <li className="">Collections</li>
-                        <li className="">Men</li>
-                        <li className="">Women</li>
-                        <li className="">About</li>
-                        <li className="">Contact</li>
+                        {links.map((link) => (
+                            <li
+                                key={link}
+                                onClick={() => setActive(link)}
+                                className={`relative pb-1 capitalize ${active === link
+                                    ? "text-[var(--dark-grayish-blue)] after:content-[''] after:absolute after:left-0 after:top-15 after:w-full after:h-[3px] after:bg-[#ff7d1a]"
+                                    : "text-gray-600"
+                                    }`}
+                            >
+                                {link}
+                            </li>
+                        ))}
+
                     </ul>
 
                 </div>
@@ -52,7 +65,7 @@ function Header() {
                     <div className="self-end absolute right-10 top-4 " onClick={toggleMenu}>
                         <X size={30} strokeWidth={3} className="cursor-pointer" />
                     </div>
-                    <ul className="flex flex-col p-4 m-4 my-10 gap-4 cursor-pointer font-semibold text-lg"> 
+                    <ul className="flex flex-col p-4 m-4 my-10 gap-4 cursor-pointer font-semibold text-lg">
                         <li>Collections</li>
                         <li className="">Men </li>
                         <li className="">Women</li>
@@ -66,8 +79,8 @@ function Header() {
 
                 {/* <Cart/> */}
 
-                <Cart/>
-                
+                <Cart />
+
                 <img src={Avatar} alt="" className="w-1/3" />
             </div>
 

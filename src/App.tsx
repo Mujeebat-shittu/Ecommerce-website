@@ -1,5 +1,5 @@
 import Main from "./components/product"
-import { CartProvider } from "./components/cart-context"
+import { CartProvider } from "react-use-cart"
 
 function App() {
 

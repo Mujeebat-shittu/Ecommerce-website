@@ -10,20 +10,25 @@ import ThumbnailTwo from "../assets/image-product-2-thumbnail.jpg"
 import ThumbnailThree from "../assets/image-product-3-thumbnail.jpg"
 import ThumbnailFour from "../assets/image-product-4-thumbnail.jpg"
 import { Plus, Minus } from "lucide-react"
+import { useCart } from "react-use-cart";
+
+
 
 function Ecommerce() {
+
     const productImages = [
-        ProductOne,
-        ProductTwo,
-        ProductThree,
-        ProductFour,
+        { id: 1, img: ProductOne },
+        { id: 2, img: ProductTwo },
+        { id: 3, img: ProductThree },
+        { id: 4, img: ProductFour }
     ];
 
     const thumbNailImages = [
-        ThumbnailOne,
-        ThumbnailTwo,
-        ThumbnailThree,
-        ThumbnailFour
+        { id: 1, img: ThumbnailOne },
+        { id: 2, img: ThumbnailTwo },
+        { id: 3, img: ThumbnailThree },
+        { id: 4, img: ThumbnailFour }
+
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0); // track which image is showing
@@ -39,66 +44,122 @@ function Ecommerce() {
         );
     };
 
+    type Product = {
+        id: string;
+        name: string;
+        price: number;
+        img: string;
+    };
+
+
+
+
+    const product: Product = {
+        id: productImages[currentIndex].id.toString(),
+        name: "Fall Limited Edition Sneakers",
+        price: 125,
+        img: productImages[currentIndex].img,
+    };
+
+    const {
+        addItem,
+        removeItem,
+        updateItemQuantity,
+        items
+    } = useCart();
+
+
+    const cartClick = (product: Product) => {
+        const existingItem = items.find((item) => item.id === product.id);
+
+        if (existingItem) {
+            updateItemQuantity(product.id, existingItem.quantity + 1);
+        } else {
+            addItem(product);
+        }
+
+    };
+
+
+    const handleIncrease = () => {
+        const currentItem = items.find(item => item.id === product.id);
+        if (!currentItem) {
+            addItem({ ...product, quantity: 1 }); // if not in cart, add it
+        } else {
+            updateItemQuantity(product.id, currentItem.quantity + 1);
+        }
+    };
+
+    const handleDecrease = () => {
+        const currentItem = items.find(item => item.id === product.id);
+        if (!currentItem) return;
+
+        if (currentItem.quantity > 1) {
+            updateItemQuantity(product.id, currentItem.quantity - 1);
+        } else {
+            removeItem(product.id); 
+        }
+    };
 
 
     return (
         <>
-            <div className="mx-auto lg:w-[90%] h-screen">
+            <div className="mx-auto w-[100%] lg:w-[90%] h-screen">
                 <Header />
 
-                <div className="w-[100%] bg-[var(--light-grayish-blue)] h-0.5 my-4"></div>
+                <div className="w-[100%] bg-[var(--light-grayish-blue)] h-0.5 "></div>
                 <main className="grid grid-cols-1 gap-0  lg:grid-cols-2 my-10 p-4 mx-10 lg:gap-10
             ">
                     <div className="img flex-1 my-0">
                         <div className="main relative flex flex-col lg:my-30 xl:my-20">
-                            <img src={productImages[currentIndex]} alt="product"
+                            <img src={productImages[currentIndex].img} alt="product"
                                 onClick={() => setIsModalOpen(true)}
                                 className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3" />
 
-                                {/* Navigation (mobile only) */}
-                                <div className="grid grid-cols-2 justify-between my-0 items-center mx-5 relative bottom-60 lg:hidden">
-                                    <ChevronLeft strokeWidth={3} color="#ff7d1a" onClick={prevImage} className=" rounded-2xl bg-white absolute left-0 cursor-pointer" />
-                                    <ChevronRight onClick={nextImage} className=" rounded-2xl bg-white absolute right-0 cursor-pointer" strokeWidth={3} color="#ff7d1a"  />
-                                </div>
+                            {/* Navigation (mobile only) */}
+                            <div className="grid grid-cols-2 justify-between my-0 items-center mx-5 relative bottom-60 lg:hidden">
+                                <ChevronLeft strokeWidth={3} color="#ff7d1a" onClick={prevImage} className=" rounded-2xl bg-white absolute left-0 cursor-pointer" />
+                                <ChevronRight onClick={nextImage} className=" rounded-2xl bg-white absolute right-0 cursor-pointer" strokeWidth={3} color="#ff7d1a" />
+                            </div>
 
                             {/* Thumbnail images for desktop */}
                             <div className="thumbnail hidden lg:grid lg:grid-cols-4 lg:gap-0 mx-0 lg:w-5/5 xl:w-4/6 rounded-lg my-2">
 
-                                {thumbNailImages.map((img, index) => (
+                                {thumbNailImages.map((thumb, index) => (
                                     <img
-                                        key={index}
-                                        src={img}
+                                        key={thumb.id}
+                                        src={thumb.img}
                                         alt={`thumb-${index}`}
                                         className={`rounded-lg cursor-pointer border-2 w-2/3 ${currentIndex === index ? "border-[#ff7d1a] opacity-75" : "border-transparent"
-                                        }`}
+                                            }`}
                                         onClick={() => setCurrentIndex(index)}
-                                        />
+                                    />
                                 ))}
-                                
-                                        </div>
 
-                                {/* Modal popup (desktop only) */}
-                                {isModalOpen && (
-                                    <div className="hidden lg:flex fixed inset-0 bg-black/70 justify-center items-center z-50">
-                                        <div className="relative p-4 rounded-lg">
-                                            <X
-                                                className="absolute -top-10 right-2 text-xl cursor-pointer"
-                                                onClick={() => setIsModalOpen(false)}
-                                                strokeWidth={3} color="#ff7d1a"
-                                            />
+                            </div>
 
-                                            <img
-                                                src={productImages[currentIndex]}
-                                                alt="modal"
-                                                className="w-[300px] rounded-lg"
-                                            />
-                                            <div className="flex justify-between mt-4">
-                                                <ChevronLeft strokeWidth={3}  onClick={prevImage} className="cursor-pointer bg-white rounded-2xl" />
-                                                <ChevronRight strokeWidth={3} color="#ff7d1a" onClick={nextImage} className="cursor-pointer bg-white rounded-2xl" />
-                                            </div>
+                            {/* Modal popup (desktop only) */}
+                            {isModalOpen && (
+                                <div className="hidden lg:flex fixed inset-0 bg-black/70 justify-center items-center z-50">
+                                    <div className="relative p-4 rounded-lg">
+                                        <X
+                                            className="absolute -top-10 right-2 text-xl cursor-pointer"
+                                            onClick={() => setIsModalOpen(false)}
+                                            strokeWidth={3} color="#ff7d1a"
+                                        />
+
+                                        <img
+                                            src={productImages[currentIndex].img}
+                                            alt="modal"
+                                            className="w-[500px] rounded-lg"
+                                        />
+                                        <div className="flex justify-between mt-4">
+                                            <ChevronLeft strokeWidth={3} onClick={prevImage} className="cursor-pointer bg-white rounded-2xl" />
+                                            <ChevronRight strokeWidth={3} color="#ff7d1a" onClick={nextImage} className="cursor-pointer bg-white rounded-2xl" />
                                         </div>
                                     </div>
-                                )}
+                                </div>
+                            )}
 
                         </div>
 
@@ -118,19 +179,26 @@ function Ecommerce() {
 
                         <p className="font-semibold text-[var(--dark-grayish-blue)]"> <s>$250.00</s>
                         </p>
+
+
+
                         <div className="buttons flex flex-row gap-6">
+
                             <button className="inline-flex py-4 px-6 w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
-                                <Plus size={15} strokeWidth={3} color="#ff7d1a"/>
-                                <p className="font-bold">0</p>
-                                <Minus size={15} color="#ff7d1a" strokeWidth={3} />
+                                <Minus size={15} color="#ff7d1a" strokeWidth={3} onClick={handleDecrease} />
+                                <p className="font-bold">{
+                                    items.find((item) => item.id === product.id)?.quantity || 0}
+                                </p>
+                                <Plus size={15} strokeWidth={3} color="#ff7d1a" onClick={handleIncrease} />
 
                             </button>
-                            <button className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold">
+                            <button className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold"
+                                onClick={() => cartClick}>
                                 <ShoppingCart size={18} />
-                                Add to cart
-
+                                Add to Cart
                             </button>
                         </div>
+
 
                     </div>
 

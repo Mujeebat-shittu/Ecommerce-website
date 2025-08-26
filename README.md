@@ -1,11 +1,11 @@
 # Shopping Cart + Product Slider
 
 A simple React project showcasing:
-- A shopping cart where you can add items by typing and pressing **Enter** or clicking the **Add** button (In progress).
+- A shopping cart where you can add items by clicking the **Add** button.
 - A product image slider with next/previous navigation and thumbnails.
 
 ## Features
-- Add items to cart with input + Enter or button
+- Add items to cart with icon or button
 - Cart item list updates dynamically
 - Product slider with:
   - Next / Previous buttons
