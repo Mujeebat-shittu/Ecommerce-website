@@ -92,12 +92,13 @@ export default function Cart() {
               ))}
 
               {/* Checkout Button */}
-              <div className="flex items-center justify-center touch-auto">
+              <div className="block items-center justify-center m">
                 <button
                   onClick={() => emptyCart()}
-                  className="px-8 py-2 border-none w-full bg-[#ff7d1a] text-lg text-black rounded-lg font-bold cursor-pointer">
-                    Checkout
+                  className="px-8 py-2 border-none w-full bg-[#ff7d1a] text-lg text-black rounded-lg font-bold cursor-pointer mb-4">
+                    Clear Cart
                 </button>
+                <button className="px-8 py-2 border-none w-full bg-[#ff7d1a] text-lg text-black rounded-lg font-bold cursor-pointer mb-4">Checkout</button>
               </div>
               </>
             )}
