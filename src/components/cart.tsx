@@ -44,7 +44,7 @@ export default function Cart() {
 
 
             {/* Dropdown */}
-            <div className="absolute right-0 top-10 w-lg h-fit bg-white shadow-lg rounded-lg p-4 z-50 mx-auto ">
+            <div className="absolute top-0 -right-20 w-lg h-fit bg-white shadow-lg rounded-lg p-4 z-50 mx-auto">
               <h1 className="text-lg font-bold text-left">Cart</h1>
               <div className="h-0.5 w-[100%] bg-[var(--dark-grayish-blue)] my-4"></div>
 
