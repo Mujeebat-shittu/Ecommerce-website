@@ -1,5 +1,6 @@
 import { ShoppingCart, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { useState } from "react"
+import { toast } from "react-hot-toast"
 import Header from "./header.tsx"
 import ProductOne from "../assets/image-product-1.jpg"
 import ProductTwo from "../assets/image-product-2.jpg"
@@ -11,6 +12,19 @@ import ThumbnailThree from "../assets/image-product-3-thumbnail.jpg"
 import ThumbnailFour from "../assets/image-product-4-thumbnail.jpg"
 import { Plus, Minus } from "lucide-react"
 import { useCart } from "react-use-cart";
+
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  images: ProductImage[];  
+  quantity?: number; 
+};
+
+type ProductImage = {
+  id: string;
+  img: string;
+};
 
 
 
@@ -30,8 +44,8 @@ function Ecommerce() {
         { id: 4, img: ThumbnailFour }
 
     ];
-
     const [currentIndex, setCurrentIndex] = useState(0); // track which image is showing
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const nextImage = () => {
@@ -44,66 +58,64 @@ function Ecommerce() {
         );
     };
 
-    type Product = {
-        id: string;
-        name: string;
-        price: number;
-        img: string;
-        quantity?: number;
+
+
+    const product : Product = {
+        id: "1",
+        name: "Sneakers",
+        price: 120,
+        images: [
+            { id: "1", img: ProductOne },
+            { id: "2", img: ProductTwo },
+            { id: "3", img: ProductThree },
+            { id: "4", img: ProductFour }
+        ],
     };
 
 
-
-
-    const product: Product = {
-        id: productImages[currentIndex].id.toString(),
-        name: "Fall Limited Edition Sneakers",
-        price: 125,
-        img: productImages[currentIndex].img,
-    };
 
     const {
         addItem,
-        removeItem,
+        // isEmpty,
+        // removeItem,
         updateItemQuantity,
-        items
+        getItem,
+        // items
     } = useCart();
 
-
-    const cartClick = (product: Product) => {
-        const existingItem = items.find(item => item.id === product.id);
-
-        if (!existingItem) {
-
-            // add item in cart if it doesn't exist
-            addItem({ ...product, quantity: 1 });
-        } 
-
-    };
+    const quantity = getItem(product.id)?.quantity ?? 0;
 
 
-    const handleIncrease = () => {
-        const currentItem = items.find(item => item.id === product.id);
-        if (!currentItem) {
-            addItem({ ...product, quantity: 1 }); // if not in cart, add it
+    const setIncrease = () => {
+        if (quantity === 0) {
+            addItem(product, 1);
         } else {
-            updateItemQuantity(product.id, (currentItem.quantity ?? 0) + 1);
+            updateItemQuantity(product.id, quantity + 1);
+        }
+    }
+
+    const setDecrease = () => {
+        if (quantity > 1) {
+            updateItemQuantity(product.id, quantity - 1);
+        }
+    }
+
+
+
+    const addToCart = () => {
+        const existingItem = getItem(product.id);
+
+        if (existingItem) {
+            updateItemQuantity(product.id, quantity);
+            toast.success(`${product.name} quantity updated!`);
+
+        } else {
+            addItem(product, quantity);
+            toast.success(`${product.name} added to cart!`);
+
         }
     };
 
-    const handleDecrease = () => {
-        const currentItem = items.find(item => item.id === product.id);
-        if (!currentItem) return;
-
-        const currentQty = currentItem.quantity ?? 0;
-
-
-        if (currentQty > 1) {
-            updateItemQuantity(product.id, currentQty - 1);
-        } else {
-            removeItem(product.id);
-        }
-    };
 
 
     return (
@@ -158,10 +170,25 @@ function Ecommerce() {
                                             className="w-[500px] rounded-lg"
                                         />
                                         <div className="flex justify-between mt-4">
-                                            <ChevronLeft strokeWidth={3} onClick={prevImage} className="cursor-pointer bg-white rounded-2xl" />
-                                            <ChevronRight strokeWidth={3} color="#ff7d1a" onClick={nextImage} className="cursor-pointer bg-white rounded-2xl" />
+                                            <ChevronLeft strokeWidth={3} onClick={() => setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)} className="cursor-pointer bg-white rounded-2xl" />
+                                            <ChevronRight strokeWidth={3} color="#ff7d1a" onClick={() => setCurrentIndex((prev) => (prev + 1) % productImages.length)} className="cursor-pointer bg-white rounded-2xl" />
                                         </div>
                                     </div>
+
+                                    <div className="-mt-12 flex flex-col gap-2">
+
+                                        {thumbNailImages.map((thumb, index) => (
+                                            <img
+                                                key={thumb.id}
+                                                src={thumb.img}
+                                                alt={`thumb-${index}`}
+                                                className={`rounded-lg cursor-pointer border-2 w-3/5 ${currentIndex === index ? "border-[#ff7d1a] opacity-75" : "border-transparent"
+                                                    }`}
+                                                onClick={() => setCurrentIndex(index)}
+                                            />
+                                        ))}
+                                    </div>
+
                                 </div>
                             )}
 
@@ -191,18 +218,19 @@ function Ecommerce() {
                             {/* Quantity Button */}
                             <div className="inline-flex py-4 px-6 w-full lg:w-1/2 bg-[hsl(220,14%,75%)] items-center justify-center gap-6 my-4 rounded-lg font-bold cursor-pointer">
                                 <button
-                                    onClick={handleDecrease}
+                                    onClick={setDecrease}
                                     className="flex items-center justify-center"
                                 >
                                     <Minus size={15} color="#ff7d1a" strokeWidth={3} className="cursor-pointer" />
                                 </button>
 
                                 <p className="font-bold">
-                                    {items.find((item) => item.id === product.id)?.quantity || 0}
+                                    {/* {items.find((item) => item.id === product.id)?.quantity || 0} */}
+                                    {quantity}
                                 </p>
 
                                 <button
-                                    onClick={handleIncrease}
+                                    onClick={setIncrease}
                                     className="flex items-center justify-center"
                                 >
                                     <Plus size={15} strokeWidth={3} color="#ff7d1a" className="cursor-pointer" />
@@ -210,8 +238,11 @@ function Ecommerce() {
                             </div>
                             {/* Add to Cart Button */}
                             <button
-                                className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold touch-auto"
-                                onClick={() => cartClick(product)}
+                                disabled={quantity === 0}
+                                className={`px-5 py-2 rounded-lg flex items-center justify-center my-4 w-full gap-2 cursor-pointer font-bold
+                                 ${quantity === 0 ? "bg-orange-100 cursor-not-allowed" : "bg-[#ff7d1a] text-black cursor-pointer"}`}
+                                // className="bg-[#ff7d1a] px-5 py-2 flex items-center justify-center my-4 rounded-lg w-full gap-2 cursor-pointer font-bold"
+                                onClick={addToCart}
                             >
                                 <ShoppingCart size={18} />
                                 Add to Cart

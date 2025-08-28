@@ -1,5 +1,6 @@
 import Main from "./components/product"
 import { CartProvider } from "react-use-cart"
+import { Toaster } from "react-hot-toast"
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <>
     <CartProvider>
       <Main/> 
+      <Toaster position="top-right" reverseOrder={false} />
     </CartProvider>
      
     </>
