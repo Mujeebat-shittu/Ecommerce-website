@@ -44,7 +44,7 @@ function Ecommerce() {
         { id: 4, img: ThumbnailFour }
 
     ];
-    const [currentIndex, setCurrentIndex] = useState(0); // track which image is showing
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -76,11 +76,8 @@ function Ecommerce() {
 
     const {
         addItem,
-        // isEmpty,
-        // removeItem,
         updateItemQuantity,
         getItem,
-        // items
     } = useCart();
 
     const quantity = getItem(product.id)?.quantity ?? 0;
