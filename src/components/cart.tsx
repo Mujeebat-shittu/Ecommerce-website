@@ -85,7 +85,7 @@ export default function Cart() {
                 {items.map((item, index) => (
                   <div key={index} className="flex flex-row gap-5 my-4 items-center justify-center p-4 rounded-2xl">
                     <div className="">
-                      <img src={item.img} alt="" className="w-30 rounded-2xl" />
+                      <img src={item.images[0].img} alt={item.name} className="w-30 rounded-2xl" />
                     </div>
                     <div className="">
                       <div>

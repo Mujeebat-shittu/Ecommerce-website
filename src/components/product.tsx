@@ -14,16 +14,16 @@ import { Plus, Minus } from "lucide-react"
 import { useCart } from "react-use-cart";
 
 type Product = {
-  id: string;
-  name: string;
-  price: number;
-  images: ProductImage[];  
-  quantity?: number; 
+    id: string;
+    name: string;
+    price: number;
+    images: ProductImage[];
+    quantity?: number;
 };
 
 type ProductImage = {
-  id: string;
-  img: string;
+    id: string;
+    img: string;
 };
 
 
@@ -49,8 +49,11 @@ function Ecommerce() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const nextImage = () => {
-        setCurrentIndex((prev) => (prev + 1) % productImages.length);
+        setCurrentIndex((prev) =>
+            prev === product.images.length - 1 ? 0 : prev + 1
+        );
     };
+
 
     const prevImage = () => {
         setCurrentIndex((prev) =>
@@ -60,10 +63,10 @@ function Ecommerce() {
 
 
 
-    const product : Product = {
+    const product: Product = {
         id: "1",
-        name: "Sneakers",
-        price: 120,
+        name: "Fall Limited Edition Sneakers",
+        price: 125,
         images: [
             { id: "1", img: ProductOne },
             { id: "2", img: ProductTwo },
