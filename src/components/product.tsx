@@ -130,8 +130,8 @@ function Ecommerce() {
                         <div className="main relative flex flex-col lg:my-30 xl:my-20">
                             <img src={productImages[currentIndex].img} alt="product"
                                 onClick={() => setIsModalOpen(true)}
-                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3 transition-transform duration-700" 
-                                 style={{ transform: `translateY(-${currentIndex * 4}%)` }}
+                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3 transition-opacity duration-700 opacity-0" 
+                                style={{ opacity: 1  }}
 />
 
                             {/* Navigation (mobile only) */}
