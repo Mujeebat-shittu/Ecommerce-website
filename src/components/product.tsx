@@ -50,7 +50,7 @@ function Ecommerce() {
 
     const nextImage = () => {
         setCurrentIndex((prev) =>
-            prev === product.images.length - 1 ? 0 : prev + 1
+            prev === productImages.length - 1 ? 0 : prev + 1
         );
     };
 
