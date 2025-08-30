@@ -130,7 +130,9 @@ function Ecommerce() {
                         <div className="main relative flex flex-col lg:my-30 xl:my-20">
                             <img src={productImages[currentIndex].img} alt="product"
                                 onClick={() => setIsModalOpen(true)}
-                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3 transition-opacity duration-500 ease-in-out" />
+                                className="rounded-xl relative lg:cursor-pointer mb-0 xl:w-2/3 transition-transform duration-700" 
+                                 style={{ transform: `translateY(-${currentIndex * 4}%)` }}
+/>
 
                             {/* Navigation (mobile only) */}
                             <div className="grid grid-cols-2 justify-between my-0 items-center mx-5 relative bottom-60 lg:hidden">
@@ -146,8 +148,9 @@ function Ecommerce() {
                                         key={thumb.id}
                                         src={thumb.img}
                                         alt={`thumb-${index}`}
-                                        className={`rounded-lg cursor-pointer border-2 w-2/3 ${currentIndex === index ? "border-[#ff7d1a] opacity-75" : "border-transparent"
+                                        className={`rounded-lg cursor-pointer border-2 w-2/3 transition-opacity duration-700 opacity-0   ${currentIndex === index ? "border-[#ff7d1a] opacity-75" : "border-transparent"
                                             }`}
+                                        style={{ opacity: 1 }}
                                         onClick={() => setCurrentIndex(index)}
                                     />
                                 ))}
@@ -167,7 +170,8 @@ function Ecommerce() {
                                         <img
                                             src={productImages[currentIndex].img}
                                             alt="modal"
-                                            className="w-[500px] rounded-lg"
+                                            className="w-[500px] rounded-lg transition-opacity duration-700 opacity-0"
+                                            style={{ opacity: 1 }}
                                         />
                                         <div className="flex justify-between mt-4">
                                             <ChevronLeft strokeWidth={3} onClick={() => setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length)} className="cursor-pointer bg-white rounded-2xl" />
